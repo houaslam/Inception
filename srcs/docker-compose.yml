@@ -1,9 +1,16 @@
 version : "3"
 services:
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+    # ports :
+    #   - "3306:3306"
   nginx:
     image: nginx
     ports:
       - "8080:80"
     restart: always
-  # wordpress:
-  # image: wordpress
+  wordpress:
+    image: wordpress
