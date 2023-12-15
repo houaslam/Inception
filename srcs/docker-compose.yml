@@ -1,9 +1,13 @@
 version : "3"
 services:
+  mariadb:
+    image: mariadb
+
+  wordpress:
+    image: wordpress
+
   nginx:
     image: nginx
-    ports:
-      - "8080:80"
-    restart: always
-  # wordpress:
-  # image: wordpress
+    # ports:
+    #   - "8080:80"
+    # restart: always
