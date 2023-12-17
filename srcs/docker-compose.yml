@@ -5,14 +5,27 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: password
-      MARIADB_PASSWORD: my_cool_secret
       MARIADB_DATABASE: exmple-database
-    # ports :
-    #   - "3306:3306"
-  nginx:
-    image: nginx
-    ports:
-      - "8080:80"
-    restart: always
+      MARIADB_USER: MyWordPressUser
+      MARIADB_PASSWORD: my_cool_secret
+
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - "8080:80"
+  #   restart: always
   wordpress:
     image: wordpress
+    depends_on:
+      - mariadb
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: MyWordPressUser
+      WORDPRESS_DB_PASSWORD: my_cool_secret
+      WORDPRESS_DB_NAME: exmple-database
+    ports :
+      - "8000:80"
+#     volumes:
+#        ["./wordpress:/var/www/html"]
+# volumes:
+#   mariadb: {}
