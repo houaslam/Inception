@@ -12,7 +12,7 @@ services:
   # nginx:
   #   image: nginx
   #   ports:
-  #     - "8080:80"
+  #     - "80:80"
   #   restart: always
   wordpress:
     image: wordpress
@@ -24,7 +24,7 @@ services:
       WORDPRESS_DB_PASSWORD: my_cool_secret
       WORDPRESS_DB_NAME: exmple-database
     ports :
-      - "8000:80"
+      - "80:80"
 #     volumes:
 #        ["./wordpress:/var/www/html"]
 # volumes:
