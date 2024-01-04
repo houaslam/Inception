@@ -6,9 +6,11 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: MyR00tMARIADBPa$$5w0rD
-      MARIADB_DATABASE: MyWordPressDatabaseName
-      MARIADB_USER: MyWordPressUser
       MARIADB_PASSWORD: Pa$$5w0rD
+      MARIADB_USER: MyWordPressUser
+      MARIADB_DATABASE: MyWordPressDatabaseName
+    ports:
+      - '3306:3306'
 
   wordpress:
     depends_on:
@@ -18,7 +20,7 @@ services:
     ports:
       - "8000:80"
     environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: MyWordPressUser
+      WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+      WORDPRESS_DB_USER: MyWordPressUser
       WORDPRESS_DB_NAME: MyWordPressDatabaseName
