@@ -3,7 +3,7 @@ all :
 
 clean :
 	docker compose -f srcs/docker-compose.yml down
-
+	docker system prune -a
 re : clean all
 
 push :
