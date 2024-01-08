@@ -18,14 +18,17 @@ sudo bash -c 'echo "
 
 # sudo bash -c 'echo "
 # server {
-#     listen 80;
-#     server_name test.com;
-#     index index.html;
-#     root /var/www/test.com;
+	# listen 80;
+	# listen [::]:80;
 
-#     location / {
-#         try_files \$uri \$uri/ =404;
-#     }
+	# server_name test.com;
+
+	# root /var/www/test.com;
+	# index index.html;
+
+	# location / {
+	# 	try_files $uri $uri/ =404;
+	# }
 # }" > /etc/nginx/sites-available/default'
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled
