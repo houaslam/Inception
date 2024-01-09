@@ -2,6 +2,6 @@ FROM debian:buster
 
 RUN apt-get update && apt-get install nginx -y
 
-# COPY /etc/nginx/nginx.conf .
+COPY  ./tools/script.sh /
 
-CMD ["cat", "/etc/nginx/nginx.conf"]
+CMD ["./script.sh"]

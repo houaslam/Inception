@@ -1,26 +1,33 @@
 version: "3" 
 services:
-
-  mariadb:
-    image: mariadb
+  nginx :
+    build : ./requirements/nginx
+    # image : nginx
+    ports: 
+      - "80:80"
     restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: MyR00tMARIADBPa$$5w0rD
-      MARIADB_PASSWORD: Pa$$5w0rD
-      MARIADB_USER: MyWordPressUser
-      MARIADB_DATABASE: MyWordPressDatabaseName
-    ports:
-      - '3306:3306'
+    volumes:
+      - /var/www/test.com:/usr/share/nginx/html
+  # mariadb:
+  #   image: mariadb
+  #   restart: always
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: MyR00tMARIADBPa$$5w0rD
+  #     MARIADB_PASSWORD: Pa$$5w0rD
+  #     MARIADB_USER: MyWordPressUser
+  #     MARIADB_DATABASE: MyWordPressDatabaseName
+  #   ports:
+  #     - '3306:3306'
 
-  wordpress:
-    depends_on:
-      - mariadb
-    image: wordpress
-    restart: always
-    ports:
-      - "8000:80"
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_PASSWORD: Pa$$5w0rD
-      WORDPRESS_DB_USER: MyWordPressUser
-      WORDPRESS_DB_NAME: MyWordPressDatabaseName
+  # wordpress:
+  #   depends_on:
+  #     - mariadb
+  #   image: wordpress
+  #   restart: always
+  #   ports:
+  #     - "8000:80"
+  #   environment:
+  #     WORDPRESS_DB_HOST: mariadb
+  #     WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+  #     WORDPRESS_DB_USER: MyWordPressUser
+  #     WORDPRESS_DB_NAME: MyWordPressDatabaseName
