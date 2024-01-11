@@ -6,8 +6,8 @@ services:
     ports: 
       - "80:80"
     restart: always
-    volumes:
-      - /var/www/test.com:/usr/share/nginx/html
+    # volumes:
+    #   - /var/www/test.com:/usr/share/nginx/html
   # mariadb:
   #   image: mariadb
   #   restart: always
