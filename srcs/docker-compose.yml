@@ -1,23 +1,24 @@
 version: "3" 
 services:
-  nginx :
-    build : ./requirements/nginx
-    # image : nginx
-    ports: 
-      - "443:443"
-    restart: always
-    # volumes:
-    #   - /var/www/test.com:/usr/share/nginx/html
-  # mariadb:
-  #   image: mariadb
+  # nginx :
+  #   build : ./requirements/nginx
+  #   # image : nginx
+  #   ports: 
+  #     - "443:443"
   #   restart: always
-  #   environment:
-  #     MARIADB_ROOT_PASSWORD: MyR00tMARIADBPa$$5w0rD
-  #     MARIADB_PASSWORD: Pa$$5w0rD
-  #     MARIADB_USER: MyWordPressUser
-  #     MARIADB_DATABASE: MyWordPressDatabaseName
-  #   ports:
-  #     - '3306:3306'
+  #   # volumes:
+  #   #   - /var/www/test.com:/usr/share/nginx/html
+  mariadb:
+    # image: mariadb
+    build: ./requirements/mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: MyR00tMARIADBPa$$5w0rD
+      MARIADB_PASSWORD: Pa$$5w0rD
+      MARIADB_USER: MyWordPressUser
+      MARIADB_DATABASE: MyWordPressDatabaseName
+    ports:
+      - '3306:3306'
 
   # wordpress:
   #   depends_on:
