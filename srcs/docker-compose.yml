@@ -1,40 +1,70 @@
+# version: "3" 
+# services:
+
+# #===================mariadb=====================
+#   mariadb:
+#     container_name: mariadb
+#     # networks:
+#     #   - inception
+#     build: ./requirements/mariaDB
+#     env_file:
+#       - .env
+#     restart: always
+#     expose:
+#       - "3306"
+
+# #=====================nginx======================
+#   nginx :
+#     container_name: nginx
+#     depends_on:
+#       - wordpress
+#     # networks:
+#       # - inception
+#     build : ./requirements/nginx
+#     restart: always
+#     ports: 
+#       - "443:443"
+
+# #=======================wordpress===============
+#   wordpress:
+#     image: wordpress
+#     container_name: wordpress
+#     env_file:
+#       - .env
+#     # networks:
+#       # - inception
+#     depends_on:
+#       - mariadb
+#     # build: ./requirements/wordpress
+#     restart: always
+#     ports:
+#       - "80:80"
+#     # expose:
+#     #   - "9000"
+
 version: "3" 
 services:
-
-#===================mariadb=====================
-  mariadb:
-    container_name: mariadb
-    networks:
-      - inception
-    build: ./requirements/mariaDB
-    env_file:
-      - .env
+  db:
+    image: mysql:5.7
     restart: always
-    expose:
-      - "3306"
-
-#=====================nginx======================
-  nginx :
-    container_name: nginx
-    depends_on:
-      - wordpress
-    networks:
-      - inception
-    build : ./requirements/nginx
-    restart: always
-    ports: 
-      - "443:443"
-
-#=======================wordpress===============
+    environment:
+      MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
+      MYSQL_DATABASE: MyWordPressDatabaseName
+      MYSQL_USER: MyWordPressUser
+      MYSQL_PASSWORD: Pa$$5w0rD
   wordpress:
-    container_name: wordpress
-    networks:
-      - inception
     depends_on:
-      - mariadb
-    env_file:
-      - .env
-    build: ./requirements/wordpress
+      - db
+    image: wordpress:latest
     restart: always
-    expose:
-      - "9000"
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: MyWordPressUser
+      WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+      WORDPRESS_DB_NAME: MyWordPressDatabaseName
+    volumes:
+      ["lol/:/var/www/html"]
+volumes:
+  mysql: {}
