@@ -1,70 +1,66 @@
-# version: "3" 
-# services:
-
-# #===================mariadb=====================
-#   mariadb:
-#     container_name: mariadb
-#     # networks:
-#     #   - inception
-#     build: ./requirements/mariaDB
-#     env_file:
-#       - .env
-#     restart: always
-#     expose:
-#       - "3306"
-
-# #=====================nginx======================
-#   nginx :
-#     container_name: nginx
-#     depends_on:
-#       - wordpress
-#     # networks:
-#       # - inception
-#     build : ./requirements/nginx
-#     restart: always
-#     ports: 
-#       - "443:443"
-
-# #=======================wordpress===============
-#   wordpress:
-#     image: wordpress
-#     container_name: wordpress
-#     env_file:
-#       - .env
-#     # networks:
-#       # - inception
-#     depends_on:
-#       - mariadb
-#     # build: ./requirements/wordpress
-#     restart: always
-#     ports:
-#       - "80:80"
-#     # expose:
-#     #   - "9000"
-
 version: "3" 
 services:
-  db:
-    image: mysql:5.7
+
+#=====================nginx======================
+  # nginx :
+  #   container_name: nginx
+  #   depends_on:
+  #     - wordpress
+  #   # networks:
+  #     # - inception
+  #   build : ./requirements/nginx
+  #   restart: always
+  #   ports: 
+  #     - "443:443"
+
+#===================mariadb=====================
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariaDB
+    env_file:
+      - .env
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
-      MYSQL_DATABASE: MyWordPressDatabaseName
-      MYSQL_USER: MyWordPressUser
-      MYSQL_PASSWORD: Pa$$5w0rD
+    expose:
+      - "3306"
+
+#=======================wordpress===============
   wordpress:
+    image: wordpress
+    container_name: wordpress
+    # environment:
+    #   WORDPRESS_DB_HOST: db:3306
+    #   WORDPRESS_DB_USER: MyWordPressUser
+    #   WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+    #   WORDPRESS_DB_NAME: MyWordPressDatabaseName
+    # env_file:
+    #   - .env
     depends_on:
-      - db
-    image: wordpress:latest
+      - mariadb
+    # build: ./requirements/wordpress
     restart: always
     ports:
-      - "8000:80"
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: MyWordPressUser
-      WORDPRESS_DB_PASSWORD: Pa$$5w0rD
-      WORDPRESS_DB_NAME: MyWordPressDatabaseName
-    volumes:
-      ["lol/:/var/www/html"]
-volumes:
-  mysql: {}
+      - "8080:80"
+    # expose:
+    #   - "9000"
+
+# version: "3" 
+# services:
+#   db:
+#     image: mysql:5.7
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
+#       MYSQL_DATABASE: MyWordPressDatabaseName
+#       MYSQL_USER: MyWordPressUser
+#       MYSQL_PASSWORD: Pa$$5w0rD
+#   wordpress:
+#     depends_on:
+#       - db
+#     image: wordpress:latest
+#     restart: always
+#     ports:
+#       - "8000:80"
+#     volumes:
+#       ["lol/:/var/www/html"]
+# volumes:
+#   mysql: {}
