@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && apt-get install nginx openssl -y
 RUN mkdir -p /etc/nginx/ssl
@@ -6,8 +6,6 @@ RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngin
 RUN mkdir -p /var/run/nginx
 RUN chmod 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
-# COPY  ./conf/nginx.conf /etc/nginx/stes_availabe/default
-# RUN ln -s /etc/nginx/stes_availabe/default /etc/nginx/stes_enabled
 COPY  ./conf/nginx.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]

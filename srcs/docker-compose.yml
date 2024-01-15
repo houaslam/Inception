@@ -1,19 +1,17 @@
-version: "3" 
-services:
+version: "3"
 
-#=====================nginx======================
-  nginx :
+services:
+  # =====================nginx======================
+  nginx:
     container_name: nginx
     depends_on:
       - wordpress
-    # networks:
-      # - inception
-    build : ./requirements/nginx
+    build: ./requirements/nginx
     restart: always
-    ports: 
+    ports:
       - "443:443"
 
-#===================mariadb=====================
+  # ===================mariadb=====================
   mariadb:
     container_name: mariadb
     build: ./requirements/mariaDB
@@ -27,7 +25,7 @@ services:
     # volumes:
       - mariadb:/var/lib/mysql
 
-#=======================wordpress===============
+  # =======================wordpress===============
   wordpress:
     image: wordpress
     container_name: wordpress
@@ -43,4 +41,25 @@ services:
       # - wordpress:/var/www/wordpress
     # expose:
     #   - "9000"
-# 
+
+# version: "3" 
+# services:
+#   db:
+#     image: mysql:5.7
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
+#       MYSQL_DATABASE: MyWordPressDatabaseName
+#       MYSQL_USER: MyWordPressUser
+#       MYSQL_PASSWORD: Pa$$5w0rD
+#   wordpress:
+#     depends_on:
+#       - db
+#     image: wordpress:latest
+#     restart: always
+#     ports:
+#       - "8000:80"
+#     volumes:
+#       ["lol/:/var/www/html"]
+# volumes:
+#   mysql: {}
