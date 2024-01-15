@@ -1,34 +1,46 @@
 version: "3" 
 services:
-  # nginx :
-  #   build : ./requirements/nginx
-  #   # image : nginx
-  #   ports: 
-  #     - "443:443"
-  #   restart: always
-    # volumes:
-    #   - /var/www/test.com:/usr/share/nginx/html
-  mariadb:
-    build: ./requirements/mariadb
-    image: mariadb
-    restart: always
-    environment:
-      SQL_ROOT_PASSWORD: MyR00tSQLPa$$5w0rD
-      SQL_PASSWORD: Pa$$5w0rD
-      SQL_USER: MyWordPressUser
-      SQL_DATABASE: MyWordPressDatabaseName
-    # ports:
-    #   - '3306:3306'
 
-  # wordpress:
-  #   depends_on:
-  #     - mariadb
-  #   image: wordpress
-  #   restart: always
-  #   ports:
-  #     - "8000:80"
-  #   environment:
-  #     WORDPRESS_DB_HOST: mariadb
-  #     WORDPRESS_DB_PASSWORD: Pa$$5w0rD
-  #     WORDPRESS_DB_USER: MyWordPressUser
-  #     WORDPRESS_DB_NAME: MyWordPressDatabaseName
+#=====================nginx======================
+  nginx :
+    container_name: nginx
+    depends_on:
+      - wordpress
+    # networks:
+      # - inception
+    build : ./requirements/nginx
+    restart: always
+    ports: 
+      - "443:443"
+
+#===================mariadb=====================
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariaDB
+    env_file:
+      - .env
+    restart: always
+    # networks:
+      # - inception
+    expose:
+      - "3306"
+    # volumes:
+      - mariadb:/var/lib/mysql
+
+#=======================wordpress===============
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    # build: ./requirements/wordpress
+    restart: always
+    ports:
+      - "8080:80"
+    # networks:
+      # - inception
+    # volumes:
+      # - wordpress:/var/www/wordpress
+    # expose:
+    #   - "9000"
+# 
