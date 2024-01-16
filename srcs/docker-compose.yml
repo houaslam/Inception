@@ -23,12 +23,10 @@ services:
       - mariadb
     build: ./requirements/wordpress
     restart: always
-    ports:
-      - "8080:80"
     expose:
       - "9000"
     volumes:
-      - wordpress:/etc/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
       - inception
   
@@ -42,7 +40,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress:/etc/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
       - inception
 
