@@ -1,12 +1,12 @@
 <?php
 
-define( 'DB_NAME', $WORDPRESS_DB_NAME );
+define( 'DB_NAME', 'mariadb');
 
-define( 'DB_USER', $WORDPRESS_DB_USER);
+define( 'DB_USER', 'MyWordPressUser');
 
-define( 'DB_PASSWORD', $WORDPRESS_DB_PASSWORD );
+define( 'DB_PASSWORD', 'Pa$$5w0rD' );
 
-define( 'DB_HOST', $WORDPRESS_DB_HOST );
+define( 'DB_HOST', 'mariadb' );
 
 define( 'DB_CHARSET', 'utf8' );
 

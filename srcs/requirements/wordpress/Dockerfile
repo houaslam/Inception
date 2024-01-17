@@ -16,7 +16,8 @@ RUN service php7.4-fpm start
 # --admin_user=admin \
 # --admin_password=asd123 \
 # --allow-root
-COPY ./conf/wp-config.php /var/www/wordpress/wp-config.php
+# RUN rm -rf /var/www/html/wp-config-sample.php 
+# COPY ./conf/wp-config.php /var/www/html/wp-config.php
 # add
 
 

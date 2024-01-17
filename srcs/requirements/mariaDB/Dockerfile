@@ -12,14 +12,17 @@ ENV MARIADB_USER=MyWordPressUser
 RUN rm -rf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN sleep 5
-RUN  service mariadb start
+# RUN  service mariadb start
 
-RUN  echo "CREATE DATABASE IF NOT EXISTS  test " > mysql
-RUN  echo "CREATE USER IF NOT EXISTS \`${MARIADB_USER}\`@'localhost' IDENTIFIED BY '${MARIADB_PASSWORD}';" >> mysql
-RUN  echo "GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE}\`.* TO \`${MARIADB_USER}\`@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';" >> mysql
-RUN  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';" >> mysql
-RUN  echo "FLUSH PRIVILEGES;" >> mysql
-RUN echo "mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown"  >> mysql
+# RUN  echo "CREATE DATABASE IF NOT EXISTS  test " > mysql
+# RUN  echo "CREATE USER IF NOT EXISTS \`${MARIADB_USER}\`@'localhost' IDENTIFIED BY '${MARIADB_PASSWORD}';" >> mysql
+# RUN  echo "GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE}\`.* TO \`${MARIADB_USER}\`@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';" >> mysql
+# RUN  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';" >> mysql
+# RUN  echo "FLUSH PRIVILEGES;" >> mysql
+# RUN echo "mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown"  >> mysql
 
-
+COPY ./conf/script.sh /
+RUN cd / ; chmod 777 script.sh
+RUN ./script.sh
 # CMD ["mysql"]
+CMD ["/script.sh"]

@@ -11,13 +11,12 @@ services:
     expose:
       - "3306"
     volumes:
-      - mariadb:/var/bin/mysql
+      - /home/debian/Desktop/Inception/maria:/var/bin/mysql
     networks:
       - inception
 
   # =======================wordpress===============
   wordpress:
-    # image: wordpress
     container_name: wordpress
     depends_on:
       - mariadb
@@ -26,7 +25,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - wordpress:/var/www/wordpress
+      - /home/debian/Desktop/Inception/wordpress:/var/www/html
     networks:
       - inception
   
@@ -40,7 +39,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress:/var/www/wordpress
+      - /home/debian/Desktop/Inception/wordpress:/var/www/html
     networks:
       - inception
 
@@ -50,17 +49,17 @@ networks:
     driver: bridge
 
 # ============volumes============
-volumes:
-  wordpress:
-    driver: local # to create the volume in local file system
-    driver_opts:
-      type: none
-      o: bind
-      device: '/home/debian/Desktop/Inception/word'
-  mariadb:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: '/home/debian/Desktop/Inception/maria'
+# volumes:
+#   wordpress:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: '/home/debian/Desktop/Inception/wordpress'
+#   mariadb:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: '/home/debian/Desktop/Inception/maria'
 
