@@ -10,8 +10,8 @@ services:
     restart: always
     expose:
       - "3306"
-    volumes:
-      - mariadb:/var/bin/mysql
+    # volumes:
+    #   - mariadb:/var/bin/mysql
     networks:
       - inception
 
@@ -24,8 +24,8 @@ services:
     restart: always
     expose:
       - "9000"
-    volumes:
-      - wordpress:/var/www/html
+    # volumes:
+    #   - wordpress:/var/www/html
     networks:
       - inception
   
@@ -49,17 +49,17 @@ networks:
     driver: bridge
 
 # ============volumes============
-volumes:
-  wordpress:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: '/Users/houaslam/Desktop/Inception/volumes/wordpress'
-  mariadb:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: '/Users/houaslam/Desktop/Inception/volumes/mariadb'
+# volumes:
+#   wordpress:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: '/Users/houaslam/Desktop/Inception/volumes/wordpress'
+#   mariadb:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: '/Users/houaslam/Desktop/Inception/volumes/mariadb'
 

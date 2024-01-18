@@ -20,12 +20,12 @@ RUN rm -rf /var/www/html/wp-config-sample.php
 COPY ./conf/wp-config.php /var/www/html
 
 
-RUN wp core install --allow-root \
---url=houaslam.42.fr \
---title=houaslam \
---admin_user=admin \
---admin_password=asd123 \
---path=/var/www/html
+# RUN wp core install --allow-root \
+# --url=houaslam.42.fr \
+# --title=houaslam \
+# --admin_user=admin \
+# --admin_password=asd123 \
+# --path=/var/www/html
 
 
 # CMD ["php-fpm7.4", "--nodaemonize"]
