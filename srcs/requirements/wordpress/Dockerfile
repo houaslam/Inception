@@ -1,7 +1,12 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install wget php7.3 php-fpm php-mysql mariadb-client curl -y
+    apt-get install wget php7.4 php-fpm php-mysql mariadb-client curl -y
+
+ENV MARIADB_DATABASE=mariadb
+ENV MARIADB_PASSWORD=password
+ENV MARIADB_USER=mariadbuser
+ENV MARIADB_ROOT_PASSWORD=rootpassword
 
 RUN mkdir /var/www
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -11,9 +16,12 @@ RUN service php7.4-fpm start
 
 WORKDIR /var/www/html
 RUN wp core download --allow-root
-RUN touch /wp-config.sh
-COPY ./conf/wp-config.sh /wp-config.sh
-RUN chmod 777 /wp-config.sh
-# ENTRYPOINT [ "/wp-config.sh" ]
+# RUN sleep 5;
+# RUN wp config create	--allow-root \
+#  --dbname='$MARIADB_DATABASE' \
+#  --dbuser='$MARIADB_USER' \
+#  --dbpass='$MARIADB_PASSWORD'\
+#  --dbhost='mariadb'\
+#  --path='/var/www/html'
 
 CMD ["php-fpm7.4", "--nodaemonize"]

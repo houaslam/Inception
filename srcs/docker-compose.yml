@@ -10,8 +10,8 @@ services:
     restart: always
     expose:
       - "3306"
-    volumes:
-      - mariadb:/var/bin/mysql
+    # volumes:
+    #   - mariadb:/var/bin/mysql
     networks:
       - inception
 
@@ -20,14 +20,17 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
+    # image: wordpress
     build: ./requirements/wordpress
     restart: always
-    expose:
-      - "9000"
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - inception
+    # expose:
+      # - "9000"
+    ports:
+      - "9000:9000"
+    # volumes:
+    #   - wordpress:/var/www/html
+    # networks:
+    #   - inception
   
   # =====================nginx======================
   nginx:
@@ -40,8 +43,8 @@ services:
       - "443:443"
     volumes:
       - wordpress:/var/www/html
-    networks:
-      - inception
+    # networks:
+    #   - inception
 
 # ========network==========
 networks:

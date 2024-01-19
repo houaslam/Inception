@@ -6,5 +6,4 @@ wp config create	--allow-root \
  --dbpass='Pa5w0rD'\
  --dbhost='mariadb'\
  --path='/var/www/html'
-
-                
+ 
