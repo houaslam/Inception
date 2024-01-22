@@ -11,13 +11,14 @@ services:
     expose:
       - "3306"
     volumes:
-      - mariadb:/var/bin/mysql
+      - /home/debian/Desktop/Inception/mariadb:/var/bin/mysql
     networks:
       - inception
 
   # =======================wordpress===============
   wordpress:
     container_name: wordpress
+    # image: wordpress
     depends_on:
       - mariadb
     build: ./requirements/wordpress
@@ -27,7 +28,7 @@ services:
     # ports:
       # - "8080:80"
     volumes:
-      - wordpress:/var/www/wordpress
+      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
     networks:
       - inception
   
@@ -41,7 +42,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress:/var/www/wordpress
+      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
     networks:
       - inception
 
@@ -57,11 +58,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: '/Users/houaslam/Desktop/Inception/volumes/wordpress'
+      device: '/home/debian/Desktop/Inception/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: '/Users/houaslam/Desktop/Inception/volumes/mariadb'
+      device: '/home/debian/Desktop/Inception/mariadb'
 

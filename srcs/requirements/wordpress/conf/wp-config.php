@@ -14,6 +14,8 @@ define( 'SECURE_AUTH_SALT', 'mettez une phrase unique ici' );
 define( 'LOGGED_IN_SALT',   'mettez une phrase unique ici' );
 define( 'NONCE_SALT',       'mettez une phrase unique ici' );
 $table_prefix = 'wp_';
+define('WP_SITEURL', 'https://houaslam.42.fr');
+define('WP_HOME', 'https://houaslam.42.fr');
 define( 'WP_DEBUG', false );
 if ( ! defined( 'ABSPATH' ) )
   define( 'ABSPATH', dirname( __FILE__ ) . '/' );
