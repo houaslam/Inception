@@ -1,51 +1,5 @@
 version: "3"
 
-services:
-  # ===================mariadb=====================
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariaDB
-    env_file:
-      - .env
-    restart: always
-    expose:
-      - "3306"
-    volumes:
-      - /home/debian/Desktop/Inception/mariadb:/var/bin/mysql
-    networks:
-      - inception
-
-  # =======================wordpress===============
-  wordpress:
-    container_name: wordpress
-    # image: wordpress
-    depends_on:
-      - mariadb
-    build: ./requirements/wordpress
-    restart: always
-    expose:
-      - "9000"
-    # ports:
-      # - "8080:80"
-    volumes:
-      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
-    networks:
-      - inception
-  
-  # =====================nginx======================
-  nginx:
-    container_name: nginx
-    depends_on:
-      - wordpress
-    build: ./requirements/nginx
-    restart: always
-    ports:
-      - "443:443"
-    volumes:
-      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
-    networks:
-      - inception
-
 # ========network==========
 networks:
   inception:
@@ -65,4 +19,48 @@ volumes:
       type: none
       o: bind
       device: '/home/debian/Desktop/Inception/mariadb'
+
+
+services:
+  # ===================mariadb=====================
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariaDB
+    env_file:
+      - ./.env
+    restart: always
+    expose:
+      - "3306"
+    volumes:
+      - /home/debian/Desktop/Inception/mariadb:/var/bin/mysql
+    networks:
+      - inception
+
+  # =======================wordpress===============
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress
+    restart: always
+    expose:
+      - "9000"
+    volumes:
+      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
+    networks:
+      - inception
+  
+  # =====================nginx======================
+  nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
+    networks:
+      - inception
 
