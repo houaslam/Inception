@@ -1,8 +1,8 @@
 <?php
-define( 'DB_NAME', $MARIADB_DATABASE );
-define( 'DB_USER', $MARAIDB_USER );
-define( 'DB_PASSWORD', $MARAIDB_PASSWORD );
-define( 'DB_HOST', $MARIADB_HOST );
+define( 'DB_NAME', 'mariadb' );
+define( 'DB_USER', 'mariadbuser' );
+define( 'DB_PASSWORD', 'password' );
+define( 'DB_HOST', 'mariadb' );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 define( 'AUTH_KEY',         'mettez une phrase unique ici' );

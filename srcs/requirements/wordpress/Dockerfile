@@ -3,6 +3,11 @@ FROM debian:bullseye
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install wget php7.4 php-fpm php-mysql mariadb-client vim curl -y
 
+ENV MARIADB_DATABASE=mariadb
+ENV MARIADB_PASSWORD=password
+ENV MARIADB_USER=mariadbuser
+ENV MARIADB_ROOT_PASSWORD=rootpassword
+
 RUN service php7.4-fpm start
 RUN sed -i 's/^listen = .*/listen = wordpress:9000/' /etc/php/7.4/fpm/pool.d/www.conf
 RUN sed -i 's/^;clear_env = .*/clear_env = no/' /etc/php/7.4/fpm/pool.d/www.conf
@@ -15,9 +20,8 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 RUN mkdir -p /var/www/wordpress
 RUN	chown -R root:root /var/www/wordpress
 
-COPY ./tools/entrypoint.sh /
+COPY ./conf/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-WORKDIR /var/www/wordpress
-
 CMD ["/entrypoint.sh"]
+
