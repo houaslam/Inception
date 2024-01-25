@@ -6,40 +6,53 @@ services:
     container_name: mariadb
     env_file:
       - .env
-    build: ./requirements/mariaDB
+    build:
+      context: ./requirements/mariaDB
+      args:
+        - MARIADB_DATABASE=mariadb
+        - MARIADB_PASSWORD=password
+        - MARIADB_USER=mariadbuser
+        - MARIADB_ROOT_PASSWORD=rootpassword
+    image: mariadb
     restart: always
     expose:
       - "3306"
     volumes:
-      - /home/debian/Desktop/Inception/mariadb:/var/bin/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - inception
 
   # =======================wordpress===============
   wordpress:
     container_name: wordpress
+    env_file:
+      - .env
     depends_on:
       - mariadb
     build: ./requirements/wordpress
+    image: wordpress
     restart: always
     expose:
       - "9000"
     volumes:
-      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
       - inception
   
   # =====================nginx======================
   nginx:
     container_name: nginx
+    env_file:
+      - .env
     depends_on:
       - wordpress
     build: ./requirements/nginx
+    image: nginx
     restart: always
     ports:
       - "443:443"
     volumes:
-      - /home/debian/Desktop/Inception/wordpress:/var/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
       - inception
 
