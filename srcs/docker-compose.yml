@@ -13,12 +13,12 @@ services:
         - MARIADB_PASSWORD=password
         - MARIADB_USER=mariadbuser
         - MARIADB_ROOT_PASSWORD=rootpassword
+    restart: unless-stopped 
     image: mariadb
-    restart: always
     expose:
       - "3306"
     volumes:
-      - mariadb:/var/lib/mysql
+      - /var/lib/mysql
     networks:
       - inception
 
@@ -68,11 +68,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: '/home/debian/Desktop/Inception/wordpress'
+      device: '/home/houaslam/data/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: '/home/debian/Desktop/Inception/mariadb'
+      device: '/home/houaslam/data/mariadb'
 

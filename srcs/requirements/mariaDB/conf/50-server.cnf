@@ -3,14 +3,26 @@
 [mysqld]
 datadir = /var/lib/mysql
 socket  = /run/mysqld/mysqld.sock
-bind_address=*
+bind_address = *
 port = 3306
 user = mysql
 
-pid-file                = /run/mysqld/mysqld.pid
-basedir                 = /usr
-tmpdir                  = /tmp
-lc-messages-dir         = /usr/share/mysql
+pid-file = /run/mysqld/mysqld.pid
+basedir = /usr
+tmpdir = /tmp
+lc-messages-dir = /usr/share/mysql
+log_error = /var/log/mysql/error.log
+
+# Security Settings
+# secure-file-priv = ...
+
+# Performance Tuning
+# key_buffer_size = ...
+# innodb_buffer_pool_size = ...
+
+# Backup Configuration
+# innodb-backup-opts = ...
+
 
 [embedded]
 

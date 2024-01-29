@@ -1,5 +1,5 @@
 #! /bin/bash
-RUN service mariadb start \
+service mariadb start \
     && sleep 5 \
     && mysql -e "CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE;" \
     && mysql -e "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'localhost' IDENTIFIED BY '$MARIADB_PASSWORD';" \
