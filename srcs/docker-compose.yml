@@ -56,6 +56,11 @@ services:
     networks:
       - inception
 
+
+#===============bonus==================
+web-page:
+  container_name: web-page
+  build: ./requirements/bonus
 # ========network==========
 networks:
   inception:
@@ -74,5 +79,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: '/home/houaslam/data/mariadb'
+      device: '/home/houaslam/Desktop/Inception/mariadb'
 
