@@ -58,9 +58,17 @@ services:
 
 
 #===============bonus==================
-web-page:
-  container_name: web-page
-  build: ./requirements/bonus
+  web:
+    container_name: web
+    build: ./requirements/bonus/web
+    image: web
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    restart: always
+    expose:
+        - "9000"
 # ========network==========
 networks:
   inception:
