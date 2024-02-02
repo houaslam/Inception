@@ -69,6 +69,20 @@ services:
     restart: always
     expose:
         - "9000"
+
+# ================redis=======================
+  redis:
+      image: redis
+      container_name: redis
+      # build: ./requirements/bonus/redis
+      command: redis-server --protected-mode no
+      # volumes:
+      #   - wordpress:/var/www/wordpress
+      networks:
+        - inception
+      restart: always
+      expose:
+          - "6379"
 # ========network==========
 networks:
   inception:

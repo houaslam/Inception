@@ -50,5 +50,9 @@ wp user create $USER $USER_EMAIL \
  --user_pass=$USER_PASS \
  --allow-root
 
+wp theme install variations
+wp config set WP_REDIS_HOST redis --allow-root
+wp plugin install redis-cache --activate --allow-root
+wp redis enable --allow-root
 
 /usr/sbin/php-fpm7.4 -F
