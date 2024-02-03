@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  # ===================mariadb=====================
+# ===================mariadb=====================
   mariadb:
     container_name: mariadb
     env_file:
@@ -18,11 +18,11 @@ services:
     expose:
       - "3306"
     volumes:
-      - /var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - inception
 
-  # =======================wordpress===============
+# =======================wordpress===============
   wordpress:
     container_name: wordpress
     env_file:
@@ -39,7 +39,7 @@ services:
     networks:
       - inception
   
-  # =====================nginx======================
+# =====================nginx======================
   nginx:
     container_name: nginx
     env_file:
@@ -57,7 +57,7 @@ services:
       - inception
 
 
-#===============bonus==================
+# ===============bonus==================
   web:
     container_name: web
     build: ./requirements/bonus/web
@@ -72,17 +72,28 @@ services:
 
 # ================redis=======================
   redis:
-      image: redis
-      container_name: redis
-      # build: ./requirements/bonus/redis
-      command: redis-server --protected-mode no
-      # volumes:
-      #   - wordpress:/var/www/wordpress
-      networks:
-        - inception
-      restart: always
-      expose:
-          - "6379"
+    container_name: redis
+    build: ./requirements/bonus/redis
+    image: redis
+    networks:
+      - inception
+    restart: always
+    expose:
+        - "6379"
+
+# ================adminer =======================
+  adminer:
+    # image: adminer:latest
+    build: ./requirements/bonus/adminer
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 7777:8080
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
 # ========network==========
 networks:
   inception:
@@ -101,5 +112,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: '/home/houaslam/Desktop/Inception/mariadb'
-
+      device: '/home/houaslam/data/mariadb'
