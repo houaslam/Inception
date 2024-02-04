@@ -5,4 +5,4 @@ wget "https://www.adminer.org/latest.php"
 chown -R www-data:www-data /var/www/wordpress/adminer.php
 chmod 755 /var/www/wordpress/adminer.php
 
-tail -f
+php -S 0.0.0.0:9000 -t /var/www/wordpress

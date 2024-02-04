@@ -9,10 +9,10 @@ services:
     build:
       context: ./requirements/mariaDB
       args:
-        - MARIADB_DATABASE=mariadb
-        - MARIADB_PASSWORD=password
-        - MARIADB_USER=mariadbuser
-        - MARIADB_ROOT_PASSWORD=rootpassword
+        - MARIADB_DATABASE=${MARIADB_DATABASE}
+        - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+        - MARIADB_USER=${MARIADB_USER}
+        - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     restart: unless-stopped 
     image: mariadb
     expose:
@@ -41,7 +41,7 @@ services:
   
 # =====================nginx======================
   nginx:
-    container_name: nginx
+    container_name: nginx_image
     env_file:
       - .env
     depends_on:
