@@ -8,6 +8,5 @@ EXPOSE 3306
 
 COPY ./conf/conf.sh /
 RUN chmod 777 /conf.sh
-ENTRYPOINT ["/conf.sh"]
 
 CMD ["/conf.sh"]
