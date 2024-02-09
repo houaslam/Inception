@@ -5,7 +5,6 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN service php7.4-fpm start
 RUN sed -i 's/^listen = .*/listen = wordpress:9000/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/^;clear_env = .*/clear_env = no/' /etc/php/7.4/fpm/pool.d/www.conf
 RUN service php7.4-fpm reload
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

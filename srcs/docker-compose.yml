@@ -6,14 +6,8 @@ services:
     container_name: mariadb
     env_file:
       - .env
-    build:
-      context: ./requirements/mariaDB
-      args:
-        - MARIADB_DATABASE=${MARIADB_DATABASE}
-        - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-        - MARIADB_USER=${MARIADB_USER}
-        - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-    restart: unless-stopped 
+    build: ./requirements/mariaDB
+    restart: always 
     image: mariadb
     expose:
       - "3306"
@@ -41,7 +35,7 @@ services:
   
 # =====================nginx======================
   nginx:
-    container_name: nginx_image
+    container_name: nginx
     env_file:
       - .env
     depends_on:
@@ -78,22 +72,36 @@ services:
     networks:
       - inception
     restart: always
-    expose:
-        - "6379"
+    volumes:
+      - wordpress:/var/www/wordpress
+    ports:
+        - "6379:6379"
 
 # ================adminer =======================
   adminer:
-    # image: adminer:latest
     build: ./requirements/bonus/adminer
     image: adminer
     container_name: adminer
     restart: always
-    ports:
-      - 7777:8080
+    expose:
+      - "7777"
     volumes:
       - wordpress:/var/www/wordpress
     networks:
       - inception
+
+# ================cadvisor=================
+  # cadvisor:
+  #   build: ./requirements/bonus/cadvisor
+  #   image: cadvisor
+  #   container_name: cadvisor
+  #   restart: always
+  #   ports:
+  #     - 80:8080
+  #   volumes:
+  #     - wordpress:/var/www/wordpress
+  #   networks:
+  #     - inception
 # ========network==========
 networks:
   inception:

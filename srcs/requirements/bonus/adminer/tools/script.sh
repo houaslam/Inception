@@ -1,8 +1,6 @@
 #! /bin/bash
 
-cd /var/www/wordpress/adminer.php
-wget "https://www.adminer.org/latest.php"
-chown -R www-data:www-data /var/www/wordpress/adminer.php
-chmod 755 /var/www/wordpress/adminer.php
+cd /var/www/wordpress
+wget -O /var/www/wordpress/adminer.php "https://www.adminer.org/latest.php"
 
-php -S 0.0.0.0:9000 -t /var/www/wordpress
+/usr/sbin/php-fpm7.4 -F
