@@ -51,57 +51,45 @@ services:
       - inception
 
 
-# ===============bonus==================
-  web:
-    container_name: web
-    build: ./requirements/bonus/web
-    image: web
-    volumes:
-      - wordpress:/var/www/wordpress
-    networks:
-      - inception
-    restart: always
-    expose:
-        - "9000"
+# # ===============bonus==================
+#   web:
+#     container_name: web
+#     build: ./requirements/bonus/web
+#     image: web
+#     volumes:
+#       - wordpress:/var/www/wordpress
+#     networks:
+#       - inception
+#     restart: always
+#     expose:
+#         - "9000"
 
-# ================redis=======================
-  redis:
-    container_name: redis
-    build: ./requirements/bonus/redis
-    image: redis
-    networks:
-      - inception
-    restart: always
-    volumes:
-      - wordpress:/var/www/wordpress
-    ports:
-        - "6379:6379"
+# # ================redis=======================
+#   redis:
+#     container_name: redis
+#     build: ./requirements/bonus/redis
+#     image: redis
+#     networks:
+#       - inception
+#     restart: always
+#     volumes:
+#       - wordpress:/var/www/wordpress
+#     ports:
+#         - "6379:6379"
 
-# ================adminer =======================
-  adminer:
-    build: ./requirements/bonus/adminer
-    image: adminer
-    container_name: adminer
-    restart: always
-    expose:
-      - "7777"
-    volumes:
-      - wordpress:/var/www/wordpress
-    networks:
-      - inception
+# # ================adminer =======================
+#   adminer:
+#     build: ./requirements/bonus/adminer
+#     image: adminer
+#     container_name: adminer
+#     restart: always
+#     expose:
+#       - "7777"
+#     volumes:
+#       - wordpress:/var/www/wordpress
+#     networks:
+#       - inception
 
-# ================cadvisor=================
-  # cadvisor:
-  #   build: ./requirements/bonus/cadvisor
-  #   image: cadvisor
-  #   container_name: cadvisor
-  #   restart: always
-  #   ports:
-  #     - 80:8080
-  #   volumes:
-  #     - wordpress:/var/www/wordpress
-  #   networks:
-  #     - inception
 # ========network==========
 networks:
   inception:

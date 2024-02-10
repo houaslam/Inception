@@ -13,9 +13,5 @@ RUN openssl req -x509 -nodes \
 RUN git clone https://github.com/houaslam/static.git /var/www/wordpress/static
 
 COPY  ./conf/nginx.conf /etc/nginx/conf.d/static.conf
-# COPY  ./conf/script.sh /
-# RUN chmod +x /script.sh
-
-# ENTRYPOINT [ "/script.sh" ]
 
 CMD ["nginx", "-g", "daemon off;"]
