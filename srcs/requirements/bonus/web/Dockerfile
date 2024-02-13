@@ -10,8 +10,7 @@ RUN openssl req -x509 -nodes \
 -keyout /etc/nginx/ssl/inception.key \
 -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=houaslam.42.fr/UID=houaslam"
 
-RUN git clone https://github.com/houaslam/static.git /var/www/wordpress/static
-
 COPY  ./conf/nginx.conf /etc/nginx/conf.d/static.conf
-
-CMD ["nginx", "-g", "daemon off;"]
+COPY  ./conf/script.sh /
+RUN chmod +x /script.sh
+CMD ["/script.sh"]

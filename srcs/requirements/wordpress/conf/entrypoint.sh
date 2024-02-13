@@ -1,7 +1,6 @@
 #!/bin/bash
 
 file_path="/var/www/wordpress/wp-config.php"
-chown -R www-data:www-data /var/www/wordpress
 cd /var/www/wordpress
 
 if [ -f "$file_path" ]; then
@@ -25,9 +24,11 @@ else
     --user_pass=$USER_PASS \
     --allow-root
 
-    # wp config set WP_REDIS_HOST redis --allow-root
-    # wp plugin install redis-cache --activate --allow-root
-    # wp redis enable --allow-root
+    sudo chmod -R 755 /var/www/wordpress
+    chown -R www-data:www-data /var/www/wordpress
+    wp config set WP_REDIS_HOST redis --allow-root
+    wp plugin install redis-cache --activate --allow-root
+    wp redis enable --allow-root
 fi
 
 /usr/sbin/php-fpm7.4 -F
